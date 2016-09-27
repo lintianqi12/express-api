@@ -15,7 +15,7 @@ app.get('/:name', function (req, res) {
 })
 
 app.post('/:name', function (req, res) {
-  res.send("lala")
+  res.send("a POST request received" + req.params.name)
 })
 
 app.listen(3000, function(){
