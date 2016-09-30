@@ -1,9 +1,15 @@
 var express = require('express')
 var app = express()
+var bodyParser = require('body-parser');
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }))
 
-app.get('/posts', function (req, res) {
-  console.log('GET /posts');
-  res.send(posts.html)
+app.get('/write', function (req, res) {
+  var page = "<form method='post' action='/posts'>"+
+                "<input type='text' name='title'/>"+
+                "<input type='submit' />"+
+             "</form>"
+  res.send(page)
 })
 
 app.get('/posts/:id', function (req, res) {
@@ -14,8 +20,8 @@ app.put('/posts/:id', function (req, res) {
   res.send("PUT /posts/:id")
 })
 
-app.post('/posts', function (req, res) {
-  res.send("POST /posts")
+app.post('/posts/', function (req, res) {
+  res.send("The Blog Title is " + req.body.title)
 })
 
 app.delete('/posts/:id', function (req, res) {
